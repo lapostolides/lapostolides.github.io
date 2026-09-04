@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Luke Apostolides">
+  <meta name="description" content="Luke Apostolides — Research Assistant in the Camera Culture group at the MIT Media Lab, working on non-line-of-sight sensing and robotics.">
+  <title>Luke Apostolides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+
+  <!-- ===== Nav ===== -->
+  <nav class="nav" aria-label="Primary">
+    <a href="#about">About</a>
+    <a href="#publications">Publications</a>
+    <a href="#projects">Projects</a>
+  </nav>
+
+  <!-- ===== Header ===== -->
+  <header class="header" id="about">
+    <h1 class="header__name">Luke Apostolides</h1>
+    <p class="header__role">Research Assistant &middot; Camera Culture Group &middot; MIT Media Lab</p>
+  </header>
+
+  <!-- ===== Intro: bio + photo ===== -->
+  <section class="intro">
+    <div class="intro__bio">
+      <p>
+        I'm a Research Assistant in the
+        <a href="https://www.media.mit.edu/groups/camera-culture/overview/">Camera Culture</a>
+        group at the MIT Media Lab, advised by Professor
+        <a href="https://www.media.mit.edu/people/raskar/overview/">Ramesh Raskar</a>.
+        My interests include computational imaging, robotics, and learning-based sensing and decision-making.
+        I work on single-photon and time-of-flight imaging, with applications in 3D vision,
+        low-light, high-speed, and non-line-of-sight imaging. My work fuses computational imaging with signal processing
+        to enable occluded object detection and tracking in adversarial environments.
+      </p>
+      <p>
+        I studied Mechanical Engineering and Computer Science at MIT (Class of 2026). Before joining
+        Camera Culture, I worked in MIT's <a href="https://aeroastro.mit.edu/mit-aerospace-physiology-lab/">Aerospace Physiology Lab
+        </a> on a predictive exoskeleton and the <a href="https://www.psfc.mit.edu/">Plasma Science and Fusion Center
+        </a> on scalable in-reactor tritium breeding for fusion. I also interned at <a href="https://gopowerlabs.com/">PowerLabs</a>, working on a trailer with robotic deployable solar panels.
+        I like to work on systems that make intelligent decisions given
+        the environment around them.
+      </p>
+      <p class="intro__links">
+        <a href="mailto:lapost3@media.mit.edu">Email</a><span class="sep">/</span>
+        <a href="https://scholar.google.com/citations?user=-pBq0oEAAAAJ&hl=en">Google Scholar</a><span class="sep">/</span>
+        <a href="https://github.com/lapostolides">GitHub</a><span class="sep">/</span>
+        <a href="https://www.linkedin.com/in/lapostolides">LinkedIn</a>
+      </p>
+    </div>
+    <!-- Replace images/profile.jpg with your photo (square crop works best) -->
+    <div class="intro__photo-frame">
+      <img class="intro__photo" src="images/MIT-95.jpg" alt="Luke Apostolides">
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ===== Publications ===== -->
+  <section id="publications">
+    <h2 class="section-title">Publications</h2>
+    <div class="projects">
+
+      <article class="project">
+        <div class="project__thumb-frame">
+          <img class="project__thumb" src="images/denali.gif" alt="DENALI dataset">
+        </div>
+        <div class="project__body">
+          <h3 class="project__title">
+            <a href="https://nikhilbehari.github.io/denali/">DENALI: A Dataset Enabling Non-Line-of-Sight Spatial Reasoning with Low-Cost LiDARs</a>
+          </h3>
+          <p class="project__authors">
+            Nikhil Behari, Diego Rivero, <strong>Luke Apostolides</strong>, Suman Ghosh, Paul Pu Liang, Ramesh Raskar
+          </p>
+          <div class="project__badges">
+            <span class="badge badge--venue">CVPR 2026</span>
+            <span class="badge badge--award">Highlight Paper</span>
+            <span class="badge badge--award">Compute Transparency Champion</span>
+          </div>
+          <div class="project__links">
+            <a href="https://nikhilbehari.github.io/denali/">project page</a>
+            <a href="https://openaccess.thecvf.com/content/CVPR2026/papers/Behari_DENALI_A_Dataset_Enabling_Non-Line-of-Sight_Spatial_Reasoning_with_Low-Cost_LiDARs_CVPR_2026_paper.pdf">paper</a>
+            <a href="https://github.com/NikhilBehari/denali">code</a>
+            <a href="https://cvpr.thecvf.com/virtual/2026/poster/40169">cvpr poster</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <img class="project__thumb" src="images/exoskeleton.jpg" alt="Exoskeleton motion prediction">
+        <div class="project__body">
+          <h3 class="project__title">
+            <a href="https://doi.org/10.3390/act14060260">Improving Tandem Fluency Through Utilization of Deep Learning to Predict Human Motion in Exoskeletons</a>
+          </h3>
+          <p class="project__authors">
+            B. HoKoo, H. C. Siu, <strong>L. Apostolides</strong>, S. Kim, L. G. Petersen
+          </p>
+          <div class="project__badges">
+            <span class="badge badge--venue">Actuators, 2025</span>
+          </div>
+          <div class="project__links">
+            <a href="https://doi.org/10.3390/act14060260">paper</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ===== Projects ===== -->
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects">
+
+      <!-- 2.009 — fill in once you have details -->
+      <article class="project">
+        <img class="project__thumb" src="images/polar.png" alt="2.009 project">
+        <div class="project__body">
+          <h3 class="project__title"><a href="#">Product Engineering Processes (2.009)</a></h3>
+          <p class="project__authors">
+            My team built a portable zamboni for individuals to create a professional ice rink
+            out of a backyard pond or lake.
+          </p>
+          <div class="project__badges">
+            <span class="badge badge--venue">Fall 2025</span>
+          </div>
+          <div class="project__links">
+            <a href="#">video</a>
+            <a href="#">writeup</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <img class="project__thumb" src="images/logo.png" alt="UR5 bottle-sorting robot">
+        <div class="project__body">
+          <h3 class="project__title"><a href="#">UR5 Bottle-Sorting Robot (2.12)</a></h3>
+          <p class="project__authors">
+            Led the UR5 sub-team for an autonomous recycling station: a computer-vision pipeline
+            and decision-making strategy for efficiently organizing bottles, plus iterative
+            end-effector prototyping for reliable gripping and removal.
+          </p>
+          <div class="project__badges">
+            <span class="badge badge--venue">Spring 2025</span>
+            <span class="badge badge--venue">OpenCV</span>
+            <span class="badge badge--venue">RTDE</span>
+            <span class="badge badge--venue">Python</span>
+          </div>
+          <div class="project__links">
+            <a href="#">code</a>
+            <a href="#">video</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <img class="project__thumb" src="images/logo.png" alt="2.007 competition robot">
+        <div class="project__body">
+          <h3 class="project__title"><a href="#">Competition Robot (2.007)</a></h3>
+          <p class="project__authors">
+            Designed, machined, and assembled a competition robot from scratch, iterating on
+            strategy and mechanical design each week and writing the control software to run it.
+          </p>
+          <div class="project__badges">
+            <span class="badge badge--venue">Spring 2024</span>
+            <span class="badge badge--venue">Design &amp; Manufacturing</span>
+          </div>
+          <div class="project__links">
+            <a href="#">video</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    Luke Apostolides &middot; Cambridge, MA
+  </footer>
+
+</main>
+</body>
+</html>
