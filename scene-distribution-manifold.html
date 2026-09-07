@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Luke Apostolides">
+  <meta name="description" content="Scene Distribution Manifold: a probabilistic model of the scenes a robot might encounter, composed from a curated library of real-world hazard phenomena.">
+  <title>Scene Distribution Manifold &middot; Luke Apostolides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+
+  <a class="back-link" href="index.html#projects">&larr; Back to Luke Apostolides</a>
+
+  <section class="project-hero">
+    <h1 class="project-hero__title">Scene Distribution Manifold</h1>
+    <div class="project-hero__badges">
+      <span class="badge badge--venue">Probabilistic Modeling</span>
+      <span class="badge badge--venue">Robotics Simulation</span>
+      <span class="badge badge--venue">Uncertainty Quantification</span>
+    </div>
+  </section>
+
+  <section class="project-section">
+    <h2 class="project-section__title">Overview</h2>
+    <p>
+      Training or evaluating a robot in simulation against one fixed scene tells you almost
+      nothing about how it behaves in the real world, where floors are sometimes wet, lighting
+      shifts, and objects show up in combinations nobody scripted. This project models the space
+      of scenes a robot might encounter as an explicit probability distribution, parameter by
+      parameter, with the physical couplings between parameters made explicit, rather than as a
+      handful of hand-picked test scenes.
+    </p>
+    <p>
+      A "scene distribution" here is a concrete, versioned object: a set of parameter marginals
+      (e.g. floor state, ambient lighting, surface friction), the conditional rules that couple
+      them when they aren't physically independent (a puddle doesn't just change the floor's
+      appearance, it also drops its friction coefficient), and a handful of named worst-case
+      scenarios called out explicitly. Every value in it carries a provenance tag, cited from a
+      source, estimated, or unknown, so it's clear what's grounded and what isn't.
+    </p>
+  </section>
+
+  <section class="project-section">
+    <h2 class="project-section__title">Approach</h2>
+    <p>
+      The pipeline has four stages:
+    </p>
+    <div class="flow flow--pipeline">
+      <div class="flow__step flow__step--stage1">
+        <span class="flow__num">1</span>
+        <span class="flow__tag">Input</span>
+        <p class="flow__desc">A curated library of phenomenon YAML files, each modeling one real-world hazard.</p>
+      </div>
+      <div class="flow__arrow flow__arrow--down">&darr;</div>
+      <div class="flow__step flow__step--stage2">
+        <span class="flow__num">2</span>
+        <span class="flow__tag">Composition</span>
+        <p class="flow__desc">A headline manifest combines several phenomena into one frozen scene distribution.</p>
+      </div>
+      <div class="flow__arrow flow__arrow--down">&darr;</div>
+      <div class="flow__step flow__step--stage3">
+        <span class="flow__num">3</span>
+        <span class="flow__tag">Sampling</span>
+        <p class="flow__desc">A quasi-Monte Carlo sampler draws scenes and applies any triggered coupling rules.</p>
+      </div>
+      <div class="flow__arrow flow__arrow--down">&darr;</div>
+      <div class="flow__step flow__step--stage4">
+        <span class="flow__num">4</span>
+        <span class="flow__tag">Checking</span>
+        <p class="flow__desc">Every scene is re-validated against those rules and flagged for provenance.</p>
+      </div>
+    </div>
+    <ol class="project-list">
+      <li>
+        <strong>Input: a curated phenomenon library.</strong> 39 YAML files across four domains
+        (home, kitchen, warehouse, contact-rich manipulation), each modeling one real-world
+        hazard or failure mode as a self-contained set of parameter distributions, coupling
+        rules, and named worst-case scenarios.
+      </li>
+      <li>
+        <strong>Composition.</strong> A buyer- or scenario-specific "headline" manifest names
+        which phenomena to combine (every shipped headline composes exactly 4) and the composer
+        concatenates their marginals, conditional rules, and named scenarios into one frozen
+        scene distribution, layering in any scenario-specific parameters on top.
+      </li>
+      <li>
+        <strong>Sampling.</strong> A quasi-Monte Carlo sampler draws concrete scene instances
+        (Latin-hypercube or Sobol sequences through the inverse CDF of each marginal, for even
+        coverage of the parameter space) and applies each conditional rule's override whenever
+        its trigger condition holds in that sample, rather than sampling coupled parameters
+        independently. A separate sampler emits the hand-authored named scenarios directly, as
+        fixed worst-case draws.
+      </li>
+      <li>
+        <strong>Checking.</strong> Every sampled scene, random or named, is run back through
+        the same coupling rules to catch any combination that shouldn't co-occur, and through a
+        provenance summary that flags which of its parameters are still only estimated rather
+        than grounded in a cited source.
+      </li>
+    </ol>
+    <div class="example-box">
+      <span class="example-box__label">Worked example</span>
+      <div class="flow">
+        <div class="flow__row">
+          <div class="flow__step">
+            <span class="flow__tag">Sampled</span>
+            <code>bathroom_floor_state</code>
+            <span class="flow__value">= puddle</span>
+          </div>
+          <div class="flow__arrow">
+            &rarr;
+            <span>triggers rule</span>
+            <code>puddle_drops_friction</code>
+          </div>
+          <div class="flow__step">
+            <span class="flow__tag">Overridden</span>
+            <code>bathroom_friction_coefficient</code>
+            <span class="flow__value">uniform(0.15, 0.65) &rarr; uniform(0.15, 0.40)</span>
+          </div>
+        </div>
+        <div class="flow__arrow flow__arrow--down">
+          &darr;
+          <span>guarantees</span>
+        </div>
+        <div class="flow__step flow__step--result">
+          <span class="flow__tag">Result</span>
+          Friction stays below the ANSI A1264.2 slip-resistant threshold (0.42) whenever a
+          puddle is present.
+        </div>
+      </div>
+      <p class="example-box__caption">
+        The two parameters move together instead of being drawn independently, so a sampled
+        scene never shows a puddle on a floor the model still treats as high-friction.
+      </p>
+    </div>
+  </section>
+
+  <section class="project-section">
+    <h2 class="project-section__title">Results</h2>
+    <ul class="project-list">
+      <li>
+        <strong>Coupling rules are enforced, not just declared.</strong> Sampling and checking
+        share the same rule engine, so a conditional like "a puddle drops the floor's friction
+        coefficient" is applied during generation and re-verified afterward, rather than being
+        documentation that the sampler is free to ignore.
+      </li>
+      <li>
+        <strong>Named worst-case scenarios ship alongside the random population.</strong> Every
+        phenomenon can define fixed, hand-authored edge cases, like a puddle under low light,
+        that are always included rather than left to chance.
+      </li>
+      <li>
+        <strong>Every parameter carries a provenance tag</strong>, so it's always clear whether a
+        given value is grounded in a cited source or still an estimate awaiting verification.
+      </li>
+    </ul>
+  </section>
+
+  <footer class="footer">
+    Luke Apostolides &middot; Cambridge, MA
+  </footer>
+
+</main>
+</body>
+</html>
